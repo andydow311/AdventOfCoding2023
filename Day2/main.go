@@ -65,7 +65,7 @@ func power(line string) int {
 	red := 0
 	for _, cs := range amountAndColourRegex.FindAllString(line, -1){
 		amount, _ := strconv.Atoi(strings.Trim(amountRegex.FindString(cs)," "))
-		switch colour := colourRegex.FindString(cs); colour {
+		switch colourRegex.FindString(cs){
 		case "green":
 			if green < amount{
 				green = amount
