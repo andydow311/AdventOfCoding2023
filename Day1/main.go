@@ -12,11 +12,9 @@ import (
 func lines(filename string) []string {
 	output := []string{}
 	readFile, err := os.Open(filename)
-
 	if err != nil {
 		fmt.Println(err)
 	}
-
 	fileScanner := bufio.NewScanner(readFile)
 	fileScanner.Split(bufio.ScanLines)
 	for fileScanner.Scan() {
@@ -33,19 +31,19 @@ func main() {
 }
 
 func partOne(lines []string) int {
-	nonAlphanumericRegex := regexp.MustCompile(`[^0-9 ]+`)
-	output := 0
+	nonNumericRegex := regexp.MustCompile(`[^0-9 ]+`)
+	calibrationValue := 0
 	for _, line := range lines {
-		digits := nonAlphanumericRegex.ReplaceAllString(line, "")
+		digits := nonNumericRegex.ReplaceAllString(line, "")
 		if len(digits) == 1 {
 			digit, _ := strconv.Atoi(string(digits) + string(digits))
-			output = output + digit
+			calibrationValue = calibrationValue + digit
 		} else {
-			thisdigit, _ := strconv.Atoi(digits[0:1] + digits[len(digits)-1:])
-			output = output + thisdigit
+			digit, _ := strconv.Atoi(digits[0:1] + digits[len(digits)-1:])
+			calibrationValue = calibrationValue + digit
 		}
 	}
-	return output
+	return calibrationValue
 }
 
 func partTwo(lines []string) int {
